@@ -23,23 +23,28 @@ def create_state(slabel):
     s2 = slabel[5]; orb2 = slabel[6]; x2 = slabel[7]; y2 = slabel[8]; z2 = slabel[9];
     s3 = slabel[10]; orb3 = slabel[11]; x3 = slabel[12]; y3 = slabel[13]; z3 = slabel[14];
     s4 = slabel[15]; orb4 = slabel[16]; x4 = slabel[17]; y4 = slabel[18]; z4 = slabel[19];  
-    s5 = slabel[20]; orb5 = slabel[21]; x5 = slabel[22]; y5 = slabel[23]; z5 = slabel[24];      
+    s5 = slabel[20]; orb5 = slabel[21]; x5 = slabel[22]; y5 = slabel[23]; z5 = slabel[24];   
+    s6 = slabel[25]; orb6 = slabel[26]; x6 = slabel[27]; y6 = slabel[28]; z6 = slabel[29];       
     
-#     assert not (((x3,y3,z3))==(x1,y1,z1) and s3==s1 and orb3==orb1)
-#     assert not (((x1,y1,z1))==(x2,y2,z2) and s1==s2 and orb1==orb2)
-#     assert not (((x3,y3,z3))==(x2,y2,z2) and s3==s2 and orb3==orb2)
-#     assert not (((x4,y4,z4))==(x1,y1,z1) and s4==s1 and orb4==orb1)
-#     assert not (((x4,y4,z4))==(x2,y2,z2) and s4==s2 and orb4==orb2)
-#     assert not (((x4,y4,z4))==(x3,y3,z3) and s4==s3 and orb4==orb3)  
-#     assert not (((x5,y5,z5))==(x1,y1,z1) and s5==s1 and orb5==orb1)
-#     assert not (((x5,y5,z5))==(x2,y2,z2) and s5==s2 and orb5==orb2)
-#     assert not (((x5,y5,z5))==(x3,y3,z3) and s5==s3 and orb5==orb3)     
-#     assert not (((x5,y5,z5))==(x4,y4,z4) and s5==s4 and orb5==orb4)     
-    
-    
+    assert not (((x3,y3,z3))==(x1,y1,z1) and s3==s1 and orb3==orb1)
+    assert not (((x1,y1,z1))==(x2,y2,z2) and s1==s2 and orb1==orb2)
+    assert not (((x3,y3,z3))==(x2,y2,z2) and s3==s2 and orb3==orb2)
+    assert not (((x4,y4,z4))==(x1,y1,z1) and s4==s1 and orb4==orb1)
+    assert not (((x4,y4,z4))==(x2,y2,z2) and s4==s2 and orb4==orb2)
+    assert not (((x4,y4,z4))==(x3,y3,z3) and s4==s3 and orb4==orb3)  
+    assert not (((x5,y5,z5))==(x1,y1,z1) and s5==s1 and orb5==orb1)
+    assert not (((x5,y5,z5))==(x2,y2,z2) and s5==s2 and orb5==orb2)
+    assert not (((x5,y5,z5))==(x3,y3,z3) and s5==s3 and orb5==orb3)     
+    assert not (((x5,y5,z5))==(x4,y4,z4) and s5==s4 and orb5==orb4)     
+    assert not (((x6,y6,z6))==(x1,y1,z1) and s6==s1 and orb6==orb1)
+    assert not (((x6,y6,z6))==(x2,y2,z2) and s6==s2 and orb6==orb2)
+    assert not (((x6,y6,z6))==(x3,y3,z3) and s6==s3 and orb6==orb3)     
+    assert not (((x6,y6,z6))==(x4,y4,z4) and s6==s4 and orb6==orb4)    
+    assert not (((x6,y6,z6))==(x5,y5,z5) and s6==s5 and orb6==orb5)    
+        
     
 #     print (slabel)
-    assert(check_in_vs_condition1(x1,y1,x2,y2,x3,y3,x4,y4,x5,y5))
+    assert(check_in_vs_condition1(x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6))
 
     state = {'hole1_spin' : s1,\
              'hole1_orb'  : orb1,\
@@ -55,7 +60,10 @@ def create_state(slabel):
              'hole4_coord': (x4,y4,z4),\
              'hole5_spin' : s5,\
              'hole5_orb'  : orb5,\
-             'hole5_coord': (x5,y5,z5)} 
+             'hole5_coord': (x5,y5,z5),\
+             'hole6_spin' : s6,\
+             'hole6_orb'  : orb6,\
+             'hole6_coord': (x6,y6,z6)}    
                     
     return state
     
@@ -163,17 +171,20 @@ def make_state_canonical(state):
     s2 = state['hole2_spin']
     s3 = state['hole3_spin']
     s4 = state['hole4_spin']  
-    s5 = state['hole5_spin']      
+    s5 = state['hole5_spin'] 
+    s6 = state['hole6_spin']     
     orb1 = state['hole1_orb']
     orb2 = state['hole2_orb']
     orb3 = state['hole3_orb']
     orb4 = state['hole4_orb']   
-    orb5 = state['hole5_orb']     
+    orb5 = state['hole5_orb']   
+    orb6 = state['hole6_orb']       
     x1, y1, z1 = state['hole1_coord']
     x2, y2, z2 = state['hole2_coord']
     x3, y3, z3 = state['hole3_coord']
     x4, y4, z4 = state['hole4_coord'] 
-    x5, y5, z5 = state['hole5_coord']     
+    x5, y5, z5 = state['hole5_coord']    
+    x6, y6, z6 = state['hole6_coord']     
 #     print(s1,orb1,x1,y1,z1,s2,orb2,x2,y2,z2,s3,orb3,x3,y3,z3,s4,orb4,x4,y4,z4,s5,orb5,x5,y5,z5)
     '''
     For three holes, the original candidate state is c_1*c_2*c_3|vac>
@@ -227,7 +238,7 @@ def make_state_canonical(state):
                 
          
     '''
-    For four holes,to generate the canonical_state:
+    For five holes,to generate the canonical_state:
     1. reorder four holes;
     2. reorder four holes’ 4th hole and 5th hole5.If its order does not be changed,the reorder is over.If its order does be changed, we proceed to the next step
     3. reorder four holes’ 3rd hole and 5th hole5.If its order does not be changed,the reorder is over.If its order does be changed, we proceed to the next step
@@ -262,10 +273,46 @@ def make_state_canonical(state):
                 else:
                     slabel3 = [s5,orb5,x5,y5,z5] + slabel2                       
         
-        
-    canonical_state = create_state(slabel3)
+    '''
+    For six holes,to generate the canonical_state:
+    
+    
+    '''                    
+    tlabel = slabel3[20:25] + [s6,orb6,x6,y6,z6]
+    tmp56, ph = reorder_state(tlabel)
+    phase *= ph                   
+    if tmp56 == tlabel:
+        slabel4 = slabel3 + [s6,orb6,x6,y6,z6]
+    else:
+        tlabel = slabel3[15:20] + [s6,orb6,x6,y6,z6] 
+        tmp46, ph = reorder_state(tlabel)
+        phase *= ph                           
+        if tmp46 == tlabel:
+            slabel4 = slabel3[0:20] + [s6,orb6,x6,y6,z6] + slabel3[20:25]
+        else:
+            tlabel = slabel3[10:15] + [s6,orb6,x6,y6,z6] 
+            tmp36, ph = reorder_state(tlabel)
+            phase *= ph                           
+            if tmp36 == tlabel:
+                slabel4 = slabel3[0:15] + [s6,orb6,x6,y6,z6] + slabel3[15:25]   
+            else:
+                tlabel = slabel3[5:10] + [s6,orb6,x6,y6,z6] 
+                tmp26, ph = reorder_state(tlabel)
+                phase *= ph                           
+                if tmp26 == tlabel:
+                    slabel4 = slabel3[0:10] + [s6,orb6,x6,y6,z6] + slabel3[10:25]     
+                else:
+                    tlabel = slabel3[0:5] + [s6,orb6,x6,y6,z6] 
+                    tmp16, ph = reorder_state(tlabel)
+                    phase *= ph                           
+                    if tmp16 == tlabel:
+                        slabel4 = slabel3[0:5] + [s6,orb6,x6,y6,z6] + slabel3[5:25]     
+                    else: 
+                        slabel4 = [s6,orb6,x6,y6,z6] + slabel3
+                    
+    canonical_state = create_state(slabel4)
                 
-    return canonical_state, phase, slabel3
+    return canonical_state, phase, slabel4
 
 def calc_manhattan_dist(x1,y1,x2,y2):
     '''
@@ -287,7 +334,7 @@ def check_in_vs_condition(x1,y1,x2,y2):
     else:
         return True
     
-def check_in_vs_condition1(x1,y1,x2,y2,x3,y3,x4,y4,x5,y5):
+def check_in_vs_condition1(x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6):
     '''
     Restrictions: the distance between one hole and Ni-site (0,0)
     and two-hole distance less than cutoff Mc
@@ -296,7 +343,8 @@ def check_in_vs_condition1(x1,y1,x2,y2,x3,y3,x4,y4,x5,y5):
         calc_manhattan_dist(x2,y2,0,0) > pam.Mc or \
         calc_manhattan_dist(x3,y3,0,0) > pam.Mc or \
         calc_manhattan_dist(x4,y4,0,0) > pam.Mc or \
-        calc_manhattan_dist(x5,y5,0,0) > pam.Mc:
+        calc_manhattan_dist(x5,y5,0,0) > pam.Mc or \
+        calc_manhattan_dist(x6,y6,0,0) > pam.Mc:
 #         calc_manhattan_dist(x1,y1,x2,y2) > 2*pam.Mc or \
 #         calc_manhattan_dist(x1,y1,x3,y3) > 2*pam.Mc or \
 #         calc_manhattan_dist(x2,y2,x3,y3) > 2*pam.Mc or \
@@ -317,7 +365,7 @@ def check_Pauli(slabel):
     s3 = slabel[10]; orb3 = slabel[11]; x3 = slabel[12]; y3 = slabel[13]; z3 = slabel[14];
     s4 = slabel[15]; orb4 = slabel[16]; x4 = slabel[17]; y4 = slabel[18]; z4 = slabel[19]; 
     s5 = slabel[20]; orb5 = slabel[21]; x5 = slabel[22]; y5 = slabel[23]; z5 = slabel[24];     
-    
+    s6 = slabel[25]; orb6 = slabel[26]; x6 = slabel[27]; y6 = slabel[28]; z6 = slabel[29];      
     
     if (s1==s2 and orb1==orb2 and x1==x2 and y1==y2 and z1==z2) or \
         (s1==s3 and orb1==orb3 and x1==x3 and y1==y3 and z1==z3) or \
@@ -328,14 +376,18 @@ def check_Pauli(slabel):
         (s1==s5 and orb1==orb5 and x1==x5 and y1==y5 and z1==z5) or \
         (s2==s5 and orb2==orb5 and x2==x5 and y2==y5 and z2==z5) or \
         (s3==s5 and orb3==orb5 and x3==x5 and y3==y5 and z3==z5) or \
-        (s4==s5 and orb4==orb5 and x4==x5 and y4==y5 and z4==z5):   
-
+        (s4==s5 and orb4==orb5 and x4==x5 and y4==y5 and z4==z5) or \
+        (s1==s6 and orb1==orb6 and x1==x6 and y1==y6 and z1==z6) or \
+        (s2==s6 and orb2==orb6 and x2==x6 and y2==y6 and z2==z6) or \
+        (s3==s6 and orb3==orb6 and x3==x6 and y3==y6 and z3==z6) or \
+        (s4==s6 and orb4==orb6 and x4==x6 and y4==y6 and z4==z6) or \
+        (s5==s6 and orb5==orb6 and x5==x6 and y5==y6 and z5==z6):
 
         return False 
     else:
         return True
     
-def exist_d6_d7_state(o1,o2,o3,o4,o5,z1,z2,z3,z4,z5):
+def exist_d6_d7_state(o1,o2,o3,o4,o5,o6,z1,z2,z3,z4,z5,z6):
 
     if (o1 in pam.Ni_Cu_orbs  and o2 in pam.Ni_Cu_orbs  and o3 in pam.Ni_Cu_orbs  and z1==z2==z3) or \
             (o1 in pam.Ni_Cu_orbs  and o2 in pam.Ni_Cu_orbs  and o4 in pam.Ni_Cu_orbs  and z1==z2==z4) or \
@@ -346,7 +398,18 @@ def exist_d6_d7_state(o1,o2,o3,o4,o5,z1,z2,z3,z4,z5):
             (o1 in pam.Ni_Cu_orbs  and o4 in pam.Ni_Cu_orbs  and o5 in pam.Ni_Cu_orbs  and z1==z4==z5) or \
             (o2 in pam.Ni_Cu_orbs  and o3 in pam.Ni_Cu_orbs  and o5 in pam.Ni_Cu_orbs  and z2==z3==z5) or \
             (o2 in pam.Ni_Cu_orbs  and o4 in pam.Ni_Cu_orbs  and o5 in pam.Ni_Cu_orbs  and z2==z4==z5) or \
-            (o3 in pam.Ni_Cu_orbs  and o4 in pam.Ni_Cu_orbs  and o5 in pam.Ni_Cu_orbs  and z3==z4==z5):
+            (o3 in pam.Ni_Cu_orbs  and o4 in pam.Ni_Cu_orbs  and o5 in pam.Ni_Cu_orbs  and z3==z4==z5) or \
+            (o1 in pam.Ni_Cu_orbs  and o2 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z1==z2==z6) or \
+            (o1 in pam.Ni_Cu_orbs  and o3 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z1==z3==z6) or \
+            (o1 in pam.Ni_Cu_orbs  and o4 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z1==z4==z6) or \
+            (o2 in pam.Ni_Cu_orbs  and o3 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z2==z3==z6) or \
+            (o2 in pam.Ni_Cu_orbs  and o4 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z2==z4==z6) or \
+            (o3 in pam.Ni_Cu_orbs  and o4 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z3==z4==z6) or \
+            (o1 in pam.Ni_Cu_orbs  and o5 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z1==z5==z6) or \
+            (o2 in pam.Ni_Cu_orbs  and o5 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z2==z5==z6) or \
+            (o3 in pam.Ni_Cu_orbs  and o5 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z3==z5==z6) or \
+            (o4 in pam.Ni_Cu_orbs  and o5 in pam.Ni_Cu_orbs  and o6 in pam.Ni_Cu_orbs  and z4==z5==z6):
+    
         return False        
     
     else:
@@ -398,18 +461,22 @@ class VariationalSpace:
             ts2 = state['hole2_spin']
             ts3 = state['hole3_spin']
             ts4 = state['hole4_spin']      
-            ts5 = state['hole5_spin']                  
+            ts5 = state['hole5_spin']
+            ts6 = state['hole6_spin']            
             torb1 = state['hole1_orb']
             torb2 = state['hole2_orb']
             torb3 = state['hole3_orb']
             torb4 = state['hole4_orb']  
-            torb5 = state['hole5_orb']              
+            torb5 = state['hole5_orb']    
+            torb6 = state['hole6_orb']               
             tx1, ty1, tz1 = state['hole1_coord']
             tx2, ty2, tz2 = state['hole2_coord']
             tx3, ty3, tz3 = state['hole3_coord']
             tx4, ty4, tz4 = state['hole4_coord']   
-            tx5, ty5, tz5 = state['hole5_coord']              
-            print (i, ts1,torb1,tx1,ty1,tz1,ts2,torb2,tx2,ty2,ts3,torb3,tx3,ty3,tz3,ts4,torb4,tx4,ty4,tz4,ts5,torb5,tx5,ty5,tz5)
+            tx5, ty5, tz5 = state['hole5_coord']    
+            tx6, ty6, tz6 = state['hole6_coord']                
+            print (i, ts1,torb1,tx1,ty1,tz1,ts2,torb2,tx2,ty2,ts3,torb3,tx3,ty3,tz3,\
+                   ts4,torb4,tx4,ty4,tz4,ts5,torb5,tx5,ty5,tz5,ts6,torb6,tx6,ty6,tz6)
                 
     def create_lookup_tbl(self):
         '''
@@ -473,43 +540,57 @@ class VariationalSpace:
                                                 if orb5s==['NotOnSublattice'] :
                                                     continue           
 
-                                                if not check_in_vs_condition1(ux,uy,vx,vy,tx,ty,wx,wy,px,py):
-                                                    continue
+
+                                                for hx in range(-Mc,Mc+1):
+                                                    Bh = Mc - abs(hx)
+                                                    funlist_h = [util.lamlist1(range(-Bh,Bh+1),[0,1,2])]
+                                                    for f1_h in funlist_h[0]:
+                                                        hy, hz = f1_h() 
+                                                        orb6s = lat.get_unit_cell_rep(hx,hy,hz)
+                                                        if orb6s==['NotOnSublattice'] :
+                                                            continue                                                       
+                                                    
+                                                        if not check_in_vs_condition1\
+                                                              (ux,uy,vx,vy,tx,ty,wx,wy,px,py,hx,hy):
+                                                            continue
 
 
-                                                #the function is used to decrease the for circulation
-                                                funlist = [util.lamlist(orb1s, orb2s, orb3s,orb4s,orb5s)]
-                                                for f1 in funlist[0]:
-                                                    orb1, orb2, orb3,orb4,orb5 = f1()
-                                                    funlist2 = [util.lamlist(['up','dn'], ['up','dn'],\
-                                                                     ['up','dn'],['up','dn'],['up','dn'])]
-                                                    for f2 in funlist2[0]:
-                                                        s1, s2, s3,s4,s5 = f2()
+                                                        #the function is used to decrease the for circulation
+                                                        funlist = [util.lamlist(orb1s, orb2s, orb3s,orb4s,orb5s,orb6s)]
+                                                        for f1 in funlist[0]:
+                                                            orb1, orb2, orb3,orb4,orb5,orb6 = f1()
+                                                            funlist2 = [util.lamlist(['up','dn'], ['up','dn'],\
+                                                                             ['up','dn'],['up','dn'],\
+                                                                             ['up','dn'],['up','dn'])]    
+                                                            for f2 in funlist2[0]:
+                                                                s1, s2, s3,s4,s5,s6 = f2()
 
-                                                        # assume two holes from undoped d9d9 is up-dn
-                                                        if pam.reduce_VS==1:
-                                                            sss = sorted([s1,s2,s3,s4,s5])
-                                                            if sss!=['dn','up','up','up','up']:
-                                                                continue
+                                                                # assume two holes from undoped d9d9 is up-dn
+                                                                if pam.reduce_VS==1:
+                                                                    sss = sorted([s1,s2,s3,s4,s5,s6])
+                                                                    if sss!=['dn','dn','dn','up','up','up']:
+                                                                        continue
 
-                                                        # neglect d7 state !!
-                                                        if not exist_d6_d7_state\
-                                                             (orb1,orb2,orb3,orb4,orb5,uz,vz,tz,wz,pz):
-                                                            continue 
+                                                                # neglect d7 state !!
+                                                                if not exist_d6_d7_state\
+                                                                     (orb1,orb2,orb3,orb4,orb5,orb6,\
+                                                                      uz,vz,tz,wz,pz,hz):
+                                                                    continue 
 
-                                                        # consider Pauli principle
-                                                        slabel = [s1,orb1,ux,uy,uz,s2,orb2,vx,vy,vz,s3,orb3,tx,ty,tz,\
-                                                                  s4,orb4,wx,wy,wz,s5,orb5,px,py,pz]         
-                                                        if not check_Pauli(slabel):
-                                                            continue  
+                                                                # consider Pauli principle
+                                                                slabel = [s1,orb1,ux,uy,uz,s2,orb2,vx,vy,vz,\
+                                                                          s3,orb3,tx,ty,tz,s4,orb4,wx,wy,wz,\
+                                                                          s5,orb5,px,py,pz,s6,orb6,hx,hy,hz]   
+                                                                if not check_Pauli(slabel):
+                                                                    continue  
 
-                                                        state = create_state(slabel)
-                                                        canonical_state,_,_ = make_state_canonical(state)
+                                                                state = create_state(slabel)
+                                                                canonical_state,_,_ = make_state_canonical(state)
 
-                                                        if self.filter_func(canonical_state):
-#                                                             print (canonical_state)
-                                                            uid = self.get_uid(canonical_state)
-                                                            lookup_tbl.append(uid)
+                                                                if self.filter_func(canonical_state):
+        #                                                             print (canonical_state)
+                                                                    uid = self.get_uid(canonical_state)
+                                                                    lookup_tbl.append(uid)
 
 
         lookup_tbl = list(set(lookup_tbl)) # remove duplicates
@@ -536,19 +617,21 @@ class VariationalSpace:
         s2 = state['hole2_spin']
         s3 = state['hole3_spin']
         s4 = state['hole4_spin']
-        s5 = state['hole5_spin']        
+        s5 = state['hole5_spin'] 
+        s6 = state['hole6_spin']                                                                         
         orb1 = state['hole1_orb']
         orb2 = state['hole2_orb']
         orb3 = state['hole3_orb']
         orb4 = state['hole4_orb']    
-        orb5 = state['hole5_orb']           
+        orb5 = state['hole5_orb']  
+        orb6 = state['hole6_orb']                                                                          
         x1, y1, z1 = state['hole1_coord']
         x2, y2, z2 = state['hole2_coord']
         x3, y3, z3 = state['hole3_coord']
         x4, y4, z4 = state['hole4_coord']    
         x5, y5, z5 = state['hole5_coord']            
-
-        if check_in_vs_condition1(x1,y1,x2,y2,x3,y3,x4,y4,x5,y5):
+        x6, y6, z6 = state['hole6_coord']  
+        if check_in_vs_condition1(x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6):
             return True
         else:
             return False
@@ -589,40 +672,48 @@ class VariationalSpace:
         B6 = B1*B5
         B7 = B1*B6 
         B8 = B1*B7
-        B9 = B1*B8         
+        B9 = B1*B8   
+        B10 = B1*B9
+        B11 = B1*B10                                                                           
         N2 = N*N
         N3 = N2*N
         N4 = N3*N
-        N5 = N4*N        
+        N5 = N4*N 
+        N6 = N5*N                                                                         
 
         s1 = state['hole1_spin']
         s2 = state['hole2_spin']
         s3 = state['hole3_spin']
-        s4 = state['hole4_spin']     
-        s5 = state['hole5_spin']          
+        s4 = state['hole4_spin']
+        s5 = state['hole5_spin'] 
+        s6 = state['hole6_spin']                                                                         
         orb1 = state['hole1_orb']
         orb2 = state['hole2_orb']
         orb3 = state['hole3_orb']
-        orb4 = state['hole4_orb'] 
-        orb5 = state['hole5_orb']         
+        orb4 = state['hole4_orb']    
+        orb5 = state['hole5_orb']  
+        orb6 = state['hole6_orb']                                                                          
         x1, y1, z1 = state['hole1_coord']
         x2, y2, z2 = state['hole2_coord']
         x3, y3, z3 = state['hole3_coord']
-        x4, y4, z4 = state['hole4_coord']  
-        x5, y5, z5 = state['hole5_coord']          
+        x4, y4, z4 = state['hole4_coord']    
+        x5, y5, z5 = state['hole5_coord']            
+        x6, y6, z6 = state['hole6_coord']         
 
         i1 = lat.spin_int[s1]
         i2 = lat.spin_int[s2]
         i3 = lat.spin_int[s3]
         i4 = lat.spin_int[s4]   
         i5 = lat.spin_int[s5] 
+        i6 = lat.spin_int[s6]                                                                         
         o1 = lat.orb_int[orb1]
         o2 = lat.orb_int[orb2]
         o3 = lat.orb_int[orb3]
         o4 = lat.orb_int[orb4]   
-        o5 = lat.orb_int[orb5]         
+        o5 = lat.orb_int[orb5]  
+        o6 = lat.orb_int[orb6]                                                                          
 
-        uid =i1 + 2*i2 + 4*i3 + 8*i4 + 16*i5 + 32*z1 +96*z2 +288*z3 +864*z4 +2592*z5 +7776*o1 +7776*N*o2 +7776*N2*o3 +7776*N3*o4 +7776*N4*o5 + 7776*N5*( (y1+s) + (x1+s)*B1 + (y2+s)*B2 + (x2+s)*B3 + (y3+s)*B4 + (x3+s)*B5 + (y4+s)*B6 + (x4+s)*B7 + (y5+s)*B8 + (x5+s)*B9)
+        uid =i1 + 2*i2 + 4*i3 + 8*i4 + 16*i5 + 32*i6 + 64*z1 +192*z2 +576*z3 +1728*z4 +5184*z5 + 15552*z6 + 46656*o1 +46656*N*o2 +46656*N2*o3 +46656*N3*o4 +46656*N4*o5 + 46656*N5*o6 +46656*N6*( (y1+s) + (x1+s)*B1 + (y2+s)*B2 + (x2+s)*B3 + (y3+s)*B4 + (x3+s)*B5 + (y4+s)*B6 + (x4+s)*B7 + (y5+s)*B8 + (x5+s)*B9 + (y6+s)*B10 + (x6+s)*B11)
 #         print (state)
         # check if uid maps back to the original state, namely uid's uniqueness
         tstate = self.get_state(uid)
@@ -630,21 +721,27 @@ class VariationalSpace:
         ts2 = tstate['hole2_spin']
         ts3 = tstate['hole3_spin']
         ts4 = tstate['hole4_spin'] 
-        ts5 = tstate['hole5_spin']         
+        ts5 = tstate['hole5_spin']
+        ts6 = tstate['hole6_spin']                                                                        
         torb1 = tstate['hole1_orb']
         torb2 = tstate['hole2_orb']
         torb3 = tstate['hole3_orb']
         torb4 = tstate['hole4_orb'] 
-        torb5 = tstate['hole5_orb']         
+        torb5 = tstate['hole5_orb'] 
+        torb6 = tstate['hole6_orb']                                                                         
         tx1, ty1, tz1 = tstate['hole1_coord']
         tx2, ty2, tz2 = tstate['hole2_coord']
         tx3, ty3, tz3 = tstate['hole3_coord']
         tx4, ty4, tz4 = tstate['hole4_coord']
-        tx5, ty5, tz5 = tstate['hole5_coord']        
+        tx5, ty5, tz5 = tstate['hole5_coord']  
+        tx6, ty6, tz6 = tstate['hole6_coord']               
         
-
-        assert((s1,orb1,x1,y1,z1,s2,orb2,x2,y2,z2,s3,orb3,x3,y3,z3,s4,orb4,x4,y4,z4,s5,orb5,x5,y5,z5)== \
-               (ts1,torb1,tx1,ty1,tz1,ts2,torb2,tx2,ty2,tz2,ts3,torb3,tx3,ty3,tz3,ts4,torb4,tx4,ty4,tz4,ts5,torb5,tx5,ty5,tz5))
+#         print (s1,orb1,x1,y1,z1,s2,orb2,x2,y2,z2,s3,orb3,x3,y3,z3,s4,orb4,x4,y4,z4,s5,orb5,x5,y5,z5,s6,orb6,x6,y6,z6)
+#         print (ts1,torb1,tx1,ty1,tz1,ts2,torb2,tx2,ty2,tz2,ts3,torb3,tx3,ty3,tz3,\
+#                 ts4,torb4,tx4,ty4,tz4,ts5,torb5,tx5,ty5,tz5,ts6,torb6,tx6,ty6,tz6)        
+        assert((s1,orb1,x1,y1,z1,s2,orb2,x2,y2,z2,s3,orb3,x3,y3,z3,s4,orb4,x4,y4,z4,s5,orb5,x5,y5,z5,s6,orb6,x6,y6,z6)== \
+               (ts1,torb1,tx1,ty1,tz1,ts2,torb2,tx2,ty2,tz2,ts3,torb3,tx3,ty3,tz3,\
+                ts4,torb4,tx4,ty4,tz4,ts5,torb5,tx5,ty5,tz5,ts6,torb6,tx6,ty6,tz6))
             
         return uid
 
@@ -663,52 +760,66 @@ class VariationalSpace:
         B7 = B1*B6   
         B8 = B1*B7
         B9 = B1*B8           
+        B10 = B1*B9
+        B11 = B1*B10                                                                           
         N2 = N*N
         N3 = N2*N
         N4 = N3*N
-        N5 = N4*N        
+        N5 = N4*N 
+        N6 = N5*N        
         
         
-        x5 = int(uid/(7776*N5*B9))- s 
-        uid_ = uid % (7776*N5*B9)
-        y5 = int(uid_/(7776*N5*B8))- s 
-        uid_ = uid_ % (7776*N5*B8)         
-        x4 = int(uid_/(7776*N5*B7))- s 
-        uid_ = uid_ % (7776*N5*B7)
-        y4 = int(uid_/(7776*N5*B6))- s 
-        uid_ = uid_ % (7776*N5*B6) 
-        x3 = int(uid_/(7776*N5*B5))- s 
-        uid_ = uid_ % (7776*N5*B5)
-        y3 = int(uid_/(7776*N5*B4))- s 
-        uid_ = uid_ % (7776*N5*B4) 
-        x2 = int(uid_/(7776*N5*B3))- s 
-        uid_ = uid_ % (7776*N5*B3)
-        y2 = int(uid_/(7776*N5*B2))- s  
-        uid_ = uid_ % (7776*N5*B2)
-        x1 = int(uid_/(7776*N5*B1))- s 
-        uid_ = uid_ % (7776*N5*B1)
-        y1 = int(uid_/(7776*N5)) - s
-        uid_ = uid_ % (7776*N5)
-        o5 = int(uid_/(7776*N4))
-        uid_ = uid_ % (7776*N4)         
-        o4 = int(uid_/(7776*N3))
-        uid_ = uid_ % (7776*N3)        
-        o3 = int(uid_/(7776*N2))
-        uid_ = uid_ % (7776*N2)
-        o2 = int(uid_/(7776*N))
-        uid_ = uid_ % (7776*N)
-        o1 = int(uid_/7776)
-        uid_ = uid_ % 7776
-        z5 = int(uid_/2592)
-        uid_ = uid_ % 2592          
-        z4 = int(uid_/864)
-        uid_ = uid_ % 864        
-        z3 = int(uid_/288)
-        uid_ = uid_ % 288
-        z2 = int( uid_/96)
-        uid_ = uid_ % 96
-        z1 = int(uid_/32)
-        uid_ = uid_ % 32
+                                                                        
+        x6 = int(uid/(46656*N6*B11))- s 
+        uid_ = uid % (46656*N6*B11)
+        y6 = int(uid_/(46656*N6*B10))- s 
+        uid_ = uid_ % (46656*N6*B10)                                                                         
+        x5 = int(uid_/(46656*N6*B9))- s 
+        uid_ = uid % (46656*N6*B9)
+        y5 = int(uid_/(46656*N6*B8))- s 
+        uid_ = uid_ % (46656*N6*B8)         
+        x4 = int(uid_/(46656*N6*B7))- s 
+        uid_ = uid_ % (46656*N6*B7)
+        y4 = int(uid_/(46656*N6*B6))- s 
+        uid_ = uid_ % (46656*N6*B6) 
+        x3 = int(uid_/(46656*N6*B5))- s 
+        uid_ = uid_ % (46656*N6*B5)
+        y3 = int(uid_/(46656*N6*B4))- s 
+        uid_ = uid_ % (46656*N6*B4) 
+        x2 = int(uid_/(46656*N6*B3))- s 
+        uid_ = uid_ % (46656*N6*B3)
+        y2 = int(uid_/(46656*N6*B2))- s  
+        uid_ = uid_ % (46656*N6*B2)
+        x1 = int(uid_/(46656*N6*B1))- s 
+        uid_ = uid_ % (46656*N6*B1)
+        y1 = int(uid_/(46656*N6)) - s
+        uid_ = uid_ % (46656*N6)
+        o6 = int(uid_/(46656*N5))
+        uid_ = uid_ % (46656*N5)                                                                         
+        o5 = int(uid_/(46656*N4))
+        uid_ = uid_ % (46656*N4)         
+        o4 = int(uid_/(46656*N3))
+        uid_ = uid_ % (46656*N3)        
+        o3 = int(uid_/(46656*N2))
+        uid_ = uid_ % (46656*N2)
+        o2 = int(uid_/(46656*N))
+        uid_ = uid_ % (46656*N)
+        o1 = int(uid_/46656)
+        uid_ = uid_ % 46656
+        z6 = int(uid_/15552)
+        uid_ = uid_ % 15552                                                                           
+        z5 = int(uid_/5184)
+        uid_ = uid_ % 5184          
+        z4 = int(uid_/1728)
+        uid_ = uid_ % 1728        
+        z3 = int(uid_/576)
+        uid_ = uid_ % 576
+        z2 = int( uid_/192)
+        uid_ = uid_ % 192
+        z1 = int(uid_/64)
+        uid_ = uid_ % 64
+        i6 = int(uid_/32)
+        uid_ = uid_ % 32                                                                         
         i5 = int(uid_/16)
         uid_ = uid_ % 16          
         i4 = int(uid_/8)
@@ -718,6 +829,7 @@ class VariationalSpace:
         i2 = int(uid_/2 )
         i1 = uid_ % 2
 
+        orb6 = lat.int_orb[o6]                                                                         
         orb5 = lat.int_orb[o5]          
         orb4 = lat.int_orb[o4]  
         orb3 = lat.int_orb[o3]
@@ -728,8 +840,9 @@ class VariationalSpace:
         s3 = lat.int_spin[i3]
         s4 = lat.int_spin[i4]        
         s5 = lat.int_spin[i5]  
-        
-        slabel = [s1,orb1,x1,y1,z1,s2,orb2,x2,y2,z2,s3,orb3,x3,y3,z3,s4,orb4,x4,y4,z4,s5,orb5,x5,y5,z5]
+        s6 = lat.int_spin[i6]   
+                                                                        
+        slabel = [s1,orb1,x1,y1,z1,s2,orb2,x2,y2,z2,s3,orb3,x3,y3,z3,s4,orb4,x4,y4,z4,s5,orb5,x5,y5,z5,s6,orb6,x6,y6,z6]
 #         print (slabel)
         state = create_state(slabel)
             

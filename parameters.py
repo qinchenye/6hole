@@ -30,12 +30,12 @@ edNi = edCu
 epNis = np.arange(1.86, 1.861, 1.0)
 
 # 29.5GPa:
-epNis = np.arange(6.8, 6.81, 1.0)
+epNis = np.arange(3.23, 3.231, 1.0)
 
 epCus = epNis
-epbilayers = epNis
+
 # 29.5GPa:
-epbilayers = np.arange(6.0,6.01, 1.0)
+epbilayers = np.arange(2.42, 2.421, 1.0)
 
 ANis = np.arange(6.0, 6.01, 1.0)
 ACus = ANis
@@ -57,18 +57,18 @@ C = 0.58
 Norb = 5
 if Norb==8 or Norb==5:
     #tpds = [0.00001]  # for check_CuO4_eigenvalues.py
-    tpds = np.linspace(1.8, 1.8, num=1, endpoint=True) #[0.25]
+    tpds = np.linspace(1.3, 1.3, num=1, endpoint=True) #[0.25]
 #     tpds = [0.01]
 
     # 29.5GPa:
-    tpds = np.linspace(4.2, 4.2, num=1, endpoint=True) #[0.25]
+    tpds = np.linspace(1.58, 1.58, num=1, endpoint=True) #[0.25]
 
     tpps = [0.55]
 
     # 29.5GPa:
     tpps = [0.35]
     
-    tapzds = np.linspace(4.2, 4.2, num=1, endpoint=True)
+    tapzds = np.linspace(1.5, 1.5, num=1, endpoint=True)
     tapzps = np.linspace(0, 0, num=1, endpoint=True)
     tz_a1a1 = 0.028
 
@@ -118,8 +118,6 @@ reduce_VS = 1
 if_H0_rotate_byU = 1
 basis_change_type = 'd_double' # 'all_states' or 'd_double'
 if_print_VS_after_basis_change = 0
-
-all_A_d8910 = 'd8'  #  'd8' or  'd9' or  'd10' 'd8' means all A give d8,'d10' means 2/A give d8 and  2/A give d10 ,'d9'  means newly 2/3A give d9 and 2A gives d10 
 
 if_compute_Aw = 0
 if if_compute_Aw==1:

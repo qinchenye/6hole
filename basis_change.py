@@ -5,10 +5,9 @@ import bisect
 import numpy as np
 import scipy.sparse as sps
 import parameters as pam
-import utility as util            
-import ground_state as gs   
-    
-def find_singlet_triplet_partner_d_double(VS, d_part, index, h345_part):
+import utility as util
+                
+def find_singlet_triplet_partner_d_double(VS, d_part, index, h3456_part):
     '''
     For a given state find its partner state to form a singlet/triplet.
     Right now only applied for d_double states
@@ -20,27 +19,38 @@ def find_singlet_triplet_partner_d_double(VS, d_part, index, h345_part):
     index: index of the singlet/triplet partner state in the VS
     phase: phase factor with which the partner state needs to be multiplied.
     '''
-    if index==145:
-        slabel = h345_part[0:5] + [d_part[0]]+d_part[6:10] + [d_part[5]]+d_part[1:5] +h345_part[5:15]
-    elif index==245:
-        slabel = [d_part[0]]+d_part[6:10] + h345_part[0:5] + [d_part[5]]+d_part[1:5] +h345_part[5:15]
-    elif index==345:
-        slabel = [d_part[0]]+d_part[6:10] + [d_part[5]]+d_part[1:5] + h345_part[0:5] +h345_part[5:15]
-    elif index==135:
-        slabel = h345_part[0:5] + [d_part[0]]+d_part[6:10]+h345_part[5:10]  + [d_part[5]]+d_part[1:5]+h345_part[10:15]
-    elif index==235:
-        slabel = [d_part[0]]+d_part[6:10] + h345_part[0:5] +h345_part[5:10]  +[d_part[5]]+d_part[1:5]+h345_part[10:15]
-    elif index==125:
-        slabel = h345_part[0:5] +h345_part[5:10] +[d_part[0]]+d_part[6:10] +[d_part[5]]+d_part[1:5]+h345_part[10:15]  
-    elif index==123:
-        slabel = h345_part[0:15]+[d_part[0]]+d_part[6:10] +[d_part[5]]+d_part[1:5]
-    elif index==124:
-        slabel = h345_part[0:10]+[d_part[0]]+d_part[6:10] + h345_part[10:15]+[d_part[5]]+d_part[1:5]        
-    elif index==134:
-        slabel = h345_part[0:5]+[d_part[0]]+d_part[6:10] + h345_part[5:15]+[d_part[5]]+d_part[1:5]            
-    elif index==234:
-        slabel = [d_part[0]]+d_part[6:10] + h345_part[0:15]+[d_part[5]]+d_part[1:5]             
-        
+    if index==1456:
+        slabel = h3456_part[0:5] + [d_part[0]]+d_part[6:10] + [d_part[5]]+d_part[1:5] +h3456_part[5:20]
+    elif index==2456:
+        slabel = [d_part[0]]+d_part[6:10] + h3456_part[0:5] + [d_part[5]]+d_part[1:5] +h3456_part[5:20]
+    elif index==3456:
+        slabel = [d_part[0]]+d_part[6:10] + [d_part[5]]+d_part[1:5] + h3456_part[0:5] +h3456_part[5:20]
+    elif index==1356:
+        slabel = h3456_part[0:5] + [d_part[0]]+d_part[6:10]+h3456_part[5:10]  + [d_part[5]]+d_part[1:5]+h3456_part[10:20]
+    elif index==2356:
+        slabel = [d_part[0]]+d_part[6:10] + h3456_part[0:5] +h3456_part[5:10]  +[d_part[5]]+d_part[1:5]+h3456_part[10:20]
+    elif index==1256:
+        slabel = h3456_part[0:5] +h3456_part[5:10] +[d_part[0]]+d_part[6:10] +[d_part[5]]+d_part[1:5]+h3456_part[10:20]  
+    elif index==1236:
+        slabel = h3456_part[0:15]+[d_part[0]]+d_part[6:10] +[d_part[5]]+d_part[1:5] + h3456_part[15:20] 
+    elif index==1246:
+        slabel = h3456_part[0:10]+[d_part[0]]+d_part[6:10] + h3456_part[10:15]+[d_part[5]]+d_part[1:5]  + h3456_part[15:20]        
+    elif index==1346:
+        slabel = h3456_part[0:5]+[d_part[0]]+d_part[6:10] + h3456_part[5:15]+[d_part[5]]+d_part[1:5] + h3456_part[15:20]            
+    elif index==2346:
+        slabel = [d_part[0]]+d_part[6:10] + h3456_part[0:15]+[d_part[5]]+d_part[1:5] + h3456_part[15:20]            
+    elif index==1234:
+        slabel = h3456_part[0:20] + [d_part[0]]+d_part[6:10] +  [d_part[5]]+d_part[1:5]
+    elif index==1235:
+        slabel = h3456_part[0:15] + [d_part[0]]+d_part[6:10] +h3456_part[15:20] +  [d_part[5]]+d_part[1:5] 
+    elif index==1245:
+        slabel = h3456_part[0:10] +  [d_part[0]]+d_part[6:10] +h3456_part[10:20]  + [d_part[5]]+d_part[1:5]
+    elif index==1345:
+        slabel = h3456_part[0:5] + [d_part[0]]+d_part[6:10]  +h3456_part[5:20] +  [d_part[5]]+d_part[1:5]  
+    elif index==2345:
+        slabel = [d_part[0]]+d_part[6:10] +  h3456_part[0:20]+  [d_part[5]]+d_part[1:5]     
+    
+      
         
                         
     tmp_state = vs.create_state(slabel)
@@ -50,7 +60,7 @@ def find_singlet_triplet_partner_d_double(VS, d_part, index, h345_part):
     return VS.get_index(partner_state), phase
 
 
-def create_singlet_triplet_basis_change_matrix_d_double(VS, d_double, double_part, idx, hole345_part):
+def create_singlet_triplet_basis_change_matrix_d_double(VS, d_double, double_part, idx, hole3456_part):
     '''
     Similar to above create_singlet_triplet_basis_change_matrix but only applies
     basis change for d_double states
@@ -108,19 +118,22 @@ def create_singlet_triplet_basis_change_matrix_d_double(VS, d_double, double_par
             ts2 = tstate['hole2_spin']
             ts3 = tstate['hole3_spin']
             ts4 = tstate['hole4_spin']  
-            ts5 = tstate['hole5_spin']              
+            ts5 = tstate['hole5_spin'] 
+            ts6 = tstate['hole6_spin']             
             torb1 = tstate['hole1_orb']
             torb2 = tstate['hole2_orb']
             torb3 = tstate['hole3_orb']
             torb4 = tstate['hole4_orb']
-            torb5 = tstate['hole5_orb']            
+            torb5 = tstate['hole5_orb']  
+            torb6 = tstate['hole6_orb']              
             tx1, ty1, tz1 = tstate['hole1_coord']
             tx2, ty2, tz2 = tstate['hole2_coord']
             tx3, ty3, tz3 = tstate['hole3_coord']
             tx4, ty4, tz4 = tstate['hole4_coord']  
-            tx5, ty5, tz5 = tstate['hole5_coord']              
+            tx5, ty5, tz5 = tstate['hole5_coord']    
+            tx6, ty6, tz6 = tstate['hole6_coord']              
             print ('Error state', double_id,ts1,torb1,tx1,ty1,tz1,ts2,torb2,tx2,ty2,tz2,ts3,torb3,tx3,ty3,tz3,\
-                                                       ts4,torb4,tx4,ty4,tz4,ts5,torb5,tx5,ty5,tz5)
+                                                       ts4,torb4,tx4,ty4,tz4,ts5,torb5,tx5,ty5,tz5,ts6,torb6,tx6,ty6,tz6)
             break
 
         elif s1=='up' and s2=='dn':
@@ -135,26 +148,37 @@ def create_singlet_triplet_basis_change_matrix_d_double(VS, d_double, double_par
                 # instead of e1e1 and e2e2
                 elif o1=='dxz':  # no need to consider e2='dyz' case
                     # generate paired e2e2 state:
-                    if idx[i]==345:
-                        slabel = [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole345_part[i][0:5] + hole345_part[i][5:15]
-                    elif idx[i]==245:
-                        slabel = [s1,'dyz']+dpos + hole345_part[i][0:5] + [s2,'dyz']+dpos + hole345_part[i][5:15]
-                    elif idx[i]==145:
-                        slabel = hole345_part[i][0:5] + [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole345_part[i][5:15]
-                    elif idx[i]==135:
-                        slabel = hole345_part[i][0:5] + [s1,'dyz']+dpos + hole345_part[i][5:10] + [s2,'dyz']+dpos + hole345_part[i][10:15] 
-                    elif idx[i]==235:
-                        slabel = [s1,'dyz']+dpos + hole345_part[i][0:5] + hole345_part[i][5:10] + [s2,'dyz']+dpos + hole345_part[i][10:15] 
-                    elif idx[i]==125:
-                        slabel = hole345_part[i][0:5] + hole345_part[i][5:10] + [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole345_part[i][10:15] 
-                    elif idx[i]==123:
-                        slabel = hole345_part[i][0:15] + [s1,'dyz']+dpos + [s2,'dyz']+dpos                   
-                    elif idx[i]==124:
-                        slabel = hole345_part[i][0:10] + [s1,'dyz']+dpos + hole345_part[i][10:15] + [s2,'dyz']+dpos                   
-                    elif idx[i]==134:
-                        slabel = hole345_part[i][0:5] + [s1,'dyz']+dpos + hole345_part[i][5:15] + [s2,'dyz']+dpos    
-                    elif idx[i]==234:
-                        slabel =[s1,'dyz']+dpos + hole345_part[i][0:15] + [s2,'dyz']+dpos                            
+                    if idx[i]==3456:
+                        slabel = [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole3456_part[i][0:5] + hole3456_part[i][5:20]
+                    elif idx[i]==2456:
+                        slabel = [s1,'dyz']+dpos + hole3456_part[i][0:5] + [s2,'dyz']+dpos + hole3456_part[i][5:20]
+                    elif idx[i]==1456:
+                        slabel = hole3456_part[i][0:5] + [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole3456_part[i][5:20]
+                    elif idx[i]==1356:
+                        slabel = hole3456_part[i][0:5] + [s1,'dyz']+dpos + hole3456_part[i][5:10] + [s2,'dyz']+dpos + hole3456_part[i][10:20] 
+                    elif idx[i]==2356:
+                        slabel = [s1,'dyz']+dpos + hole3456_part[i][0:5] + hole3456_part[i][5:10] + [s2,'dyz']+dpos + hole3456_part[i][10:20] 
+                    elif idx[i]==1256:
+                        slabel = hole3456_part[i][0:5] + hole3456_part[i][5:10] + [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole3456_part[i][10:20] 
+                    elif idx[i]==1236:
+                        slabel = hole3456_part[i][0:15] + [s1,'dyz']+dpos + [s2,'dyz']+dpos +hole3456_part[i][15:20]     
+                    elif idx[i]==1246:
+                        slabel = hole3456_part[i][0:10] + [s1,'dyz']+dpos + hole3456_part[i][10:15] + [s2,'dyz']+dpos+hole3456_part[i][15:20]   
+                    elif idx[i]==1346:
+                        slabel = hole3456_part[i][0:5] + [s1,'dyz']+dpos + hole3456_part[i][5:15] + [s2,'dyz']+dpos  +hole3456_part[i][15:20]     
+                    elif idx[i]==2346:
+                        slabel =[s1,'dyz']+dpos + hole3456_part[i][0:15] + [s2,'dyz']+dpos+hole3456_part[i][15:20]   
+                    elif idx[i]==1234:
+                        slabel = hole3456_part[i][0:20] + [s1,'dyz']+dpos +  [s2,'dyz']+dpos
+                    elif idx[i]==1235:
+                        slabel = hole3456_part[i][0:15] + [s1,'dyz']+dpos +hole3456_part[i][15:20] +  [s2,'dyz']+dpos 
+                    elif idx[i]==1245:
+                        slabel = hole3456_part[i][0:10] +  [s1,'dyz']+dpos +hole3456_part[i][10:20]  + [s2,'dyz']+dpos
+                    elif idx[i]==1345:
+                        slabel = hole3456_part[i][0:5] + [s1,'dyz']+dpos  +hole3456_part[i][5:20] +  [s2,'dyz']+dpos  
+                    elif idx[i]==2345:
+                        slabel = [s1,'dyz']+dpos +  hole3456_part[i][0:20]+  [s2,'dyz']+dpos        
+                         
                         
                         
 
@@ -178,15 +202,14 @@ def create_singlet_triplet_basis_change_matrix_d_double(VS, d_double, double_par
 
             else:
                 if double_id not in count_list:
-                    j, ph = find_singlet_triplet_partner_d_double(VS, double_part[i], idx[i], hole345_part[i])
+                    j, ph = find_singlet_triplet_partner_d_double(VS, double_part[i], idx[i], hole3456_part[i])
 
                     # append matrix elements for singlet states
                     # convention: original state col i stores singlet and 
                     #             partner state col j stores triplet
                     data.append(1.0);  row.append(double_id); col.append(double_id)
                     data.append(-ph);  row.append(j); col.append(double_id)
-                    S_d8_val[double_id]  = 0          
-                    
+                    S_d8_val[double_id]  = 0                                                                      
                     Sz_d8_val[double_id] = 0
 
                     #print "partner states:", i,j
@@ -204,7 +227,7 @@ def create_singlet_triplet_basis_change_matrix_d_double(VS, d_double, double_par
                     count_singlet += 1
                     count_triplet += 1
                
-    print("basis _singlet_triplet_%s seconds ---" % (time.time() - start_time))
+    print("basis %s seconds ---" % (time.time() - start_time))
     return sps.coo_matrix((data,(row,col)),shape=(VS.dim,VS.dim))/np.sqrt(2.0), S_d8_val, Sz_d8_val, AorB_d8_sym
 
 
@@ -235,23 +258,34 @@ def find_singlet_triplet_partner(VS, Ni_layer, Cu_layer, NiorCu, i, Ni_i, Cu_i,p
         if Ni_i== [0,1]:   
             slabel = [Ni_layer[5]]+ Ni_layer[1:5]+ [Ni_layer[0]]+ Ni_layer[6:10]+ mix_layer
         elif Ni_i==[0,2] :  
-            slabel = [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[0:5] + [Ni_layer[0]]+ Ni_layer[6:10]+ mix_layer[5:15]            
+            slabel = [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[0:5] + [Ni_layer[0]]+ Ni_layer[6:10]+ mix_layer[5:20]            
         elif Ni_i==[0,3] :  
-            slabel = [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[0:10] + [Ni_layer[0]]+ Ni_layer[6:10] + mix_layer[10:15]
+            slabel = [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[0:10] + [Ni_layer[0]]+ Ni_layer[6:10] + mix_layer[10:20]
         elif Ni_i==[1,2] :  
-            slabel = mix_layer[0:5]+ [Ni_layer[5]]+ Ni_layer[1:5]+  [Ni_layer[0]]+ Ni_layer[6:10]+ mix_layer[5:15] 
+            slabel = mix_layer[0:5]+ [Ni_layer[5]]+ Ni_layer[1:5]+  [Ni_layer[0]]+ Ni_layer[6:10]+ mix_layer[5:20] 
         elif Ni_i==[1,3] :  
-            slabel = mix_layer[0:5]+ [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[5:10]+ [Ni_layer[0]]+ Ni_layer[6:10]+ mix_layer[10:15]
+            slabel = mix_layer[0:5]+ [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[5:10]+ [Ni_layer[0]]+ Ni_layer[6:10]+ mix_layer[10:20]
         elif Ni_i==[2,3] :  
-            slabel = mix_layer[0:10]+ [Ni_layer[5]]+ Ni_layer[1:5]+ [Ni_layer[0]]+ Ni_layer[6:10]+ mix_layer[10:15]
+            slabel = mix_layer[0:10]+ [Ni_layer[5]]+ Ni_layer[1:5]+ [Ni_layer[0]]+ Ni_layer[6:10]+ mix_layer[10:20]
         elif Ni_i==[0,4] :  
-            slabel = [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer + [Ni_layer[0]]+ Ni_layer[6:10]
+            slabel = [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[0:15] + [Ni_layer[0]]+ Ni_layer[6:10]+mix_layer[15:20] 
         elif Ni_i==[1,4] :  
-            slabel = mix_layer[0:5] + [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[5:15] + [Ni_layer[0]]+ Ni_layer[6:10]     
+            slabel = mix_layer[0:5] + [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[5:15] + [Ni_layer[0]]+ Ni_layer[6:10] +mix_layer[15:20]     
         elif Ni_i==[2,4] :  
-            slabel = mix_layer[0:10] + [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[10:15] + [Ni_layer[0]]+ Ni_layer[6:10]    
+            slabel = mix_layer[0:10] + [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[10:15] + [Ni_layer[0]]+ Ni_layer[6:10] +mix_layer[15:20]    
         elif Ni_i==[3,4] :  
-            slabel = mix_layer + [Ni_layer[5]]+ Ni_layer[1:5]+ [Ni_layer[0]]+ Ni_layer[6:10] 
+            slabel = mix_layer[0:15] + [Ni_layer[5]]+ Ni_layer[1:5]+ [Ni_layer[0]]+ Ni_layer[6:10] +mix_layer[15:20] 
+        elif Ni_i== [0,5]:   
+            slabel = [Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer + [Ni_layer[0]]+ Ni_layer[6:10]
+        elif Ni_i== [1,5]:   
+            slabel = mix_layer[0:5] +[Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[5:20] + [Ni_layer[0]]+ Ni_layer[6:10]            
+        elif Ni_i== [2,5]:   
+            slabel = mix_layer[0:10] +[Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[10:20] + [Ni_layer[0]]+ Ni_layer[6:10]              
+        elif Ni_i== [3,5]:   
+            slabel = mix_layer[0:15] +[Ni_layer[5]]+ Ni_layer[1:5]+ mix_layer[15:20] + [Ni_layer[0]]+ Ni_layer[6:10]              
+        elif Ni_i== [4,5]:   
+            slabel = mix_layer[0:20] +[Ni_layer[5]]+ Ni_layer[1:5]+ [Ni_layer[0]]+ Ni_layer[6:10]           
+            
             
     elif NiorCu=='Cu':
 #         print (Cu_i)
@@ -259,23 +293,34 @@ def find_singlet_triplet_partner(VS, Ni_layer, Cu_layer, NiorCu, i, Ni_i, Cu_i,p
         if Cu_i== [0,1]:   
             slabel = [Cu_layer[5]]+ Cu_layer[1:5]+ [Cu_layer[0]]+ Cu_layer[6:10]+ mix_layer
         elif Cu_i==[0,2] :  
-            slabel = [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[0:5] + [Cu_layer[0]]+ Cu_layer[6:10]+ mix_layer[5:15]            
+            slabel = [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[0:5] + [Cu_layer[0]]+ Cu_layer[6:10]+ mix_layer[5:20]            
         elif Cu_i==[0,3] :  
-            slabel = [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[0:10] + [Cu_layer[0]]+ Cu_layer[6:10] + mix_layer[10:15]
+            slabel = [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[0:10] + [Cu_layer[0]]+ Cu_layer[6:10] + mix_layer[10:20]
         elif Cu_i==[1,2] :  
-            slabel = mix_layer[0:5]+ [Cu_layer[5]]+ Cu_layer[1:5]+  [Cu_layer[0]]+ Cu_layer[6:10]+ mix_layer[5:15] 
+            slabel = mix_layer[0:5]+ [Cu_layer[5]]+ Cu_layer[1:5]+  [Cu_layer[0]]+ Cu_layer[6:10]+ mix_layer[5:20] 
         elif Cu_i==[1,3] :  
-            slabel = mix_layer[0:5]+ [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[5:10]+ [Cu_layer[0]]+ Cu_layer[6:10]+ mix_layer[10:15]
+            slabel = mix_layer[0:5]+ [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[5:10]+ [Cu_layer[0]]+ Cu_layer[6:10]+ mix_layer[10:20]
         elif Cu_i==[2,3] :  
-            slabel = mix_layer[0:10]+ [Cu_layer[5]]+ Cu_layer[1:5]+ [Cu_layer[0]]+ Cu_layer[6:10]+ mix_layer[10:15]
+            slabel = mix_layer[0:10]+ [Cu_layer[5]]+ Cu_layer[1:5]+ [Cu_layer[0]]+ Cu_layer[6:10]+ mix_layer[10:20]
         elif Cu_i==[0,4] :  
-            slabel = [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer + [Cu_layer[0]]+ Cu_layer[6:10]
+            slabel = [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[0:15] + [Cu_layer[0]]+ Cu_layer[6:10]+mix_layer[15:20] 
         elif Cu_i==[1,4] :  
-            slabel = mix_layer[0:5] + [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[5:15] + [Cu_layer[0]]+ Cu_layer[6:10]     
+            slabel = mix_layer[0:5] + [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[5:15] + [Cu_layer[0]]+ Cu_layer[6:10] +mix_layer[15:20]     
         elif Cu_i==[2,4] :  
-            slabel = mix_layer[0:10] + [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[10:15] + [Cu_layer[0]]+ Cu_layer[6:10]    
+            slabel = mix_layer[0:10] + [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[10:15] + [Cu_layer[0]]+ Cu_layer[6:10] +mix_layer[15:20]    
         elif Cu_i==[3,4] :  
-            slabel = mix_layer + [Cu_layer[5]]+ Cu_layer[1:5]+ [Cu_layer[0]]+ Cu_layer[6:10]  
+            slabel = mix_layer[0:15] + [Cu_layer[5]]+ Cu_layer[1:5]+ [Cu_layer[0]]+ Cu_layer[6:10] +mix_layer[15:20] 
+        elif Cu_i== [0,5]:   
+            slabel = [Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer + [Cu_layer[0]]+ Cu_layer[6:10]
+        elif Cu_i== [1,5]:   
+            slabel = mix_layer[0:5] +[Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[5:20] + [Cu_layer[0]]+ Cu_layer[6:10]            
+        elif Cu_i== [2,5]:   
+            slabel = mix_layer[0:10] +[Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[10:20] + [Cu_layer[0]]+ Cu_layer[6:10]              
+        elif Cu_i== [3,5]:   
+            slabel = mix_layer[0:15] +[Cu_layer[5]]+ Cu_layer[1:5]+ mix_layer[15:20] + [Cu_layer[0]]+ Cu_layer[6:10]              
+        elif Cu_i== [4,5]:   
+            slabel = mix_layer[0:20] +[Cu_layer[5]]+ Cu_layer[1:5]+ [Cu_layer[0]]+ Cu_layer[6:10]                  
+
         
     #print(slabel)
     tmp_state = vs.create_state(slabel)
@@ -287,7 +332,7 @@ def find_singlet_triplet_partner(VS, Ni_layer, Cu_layer, NiorCu, i, Ni_i, Cu_i,p
 
 
 
-def create_singlet_triplet_basis_change_matrix(VS, double_part, idx, hole345_part,d_Ni_double, d_Cu_double, NiorCu):
+def create_singlet_triplet_basis_change_matrix(VS, double_part, idx, hole3456_part,d_Ni_double, d_Cu_double, NiorCu):
     '''
     Create a matrix representing the basis change to singlets/triplets. The
     columns of the output matrix are the new basis vectors. 
@@ -330,18 +375,20 @@ def create_singlet_triplet_basis_change_matrix(VS, double_part, idx, hole345_par
         s2 = start_state['hole2_spin']
         s3 = start_state['hole3_spin']
         s4 = start_state['hole4_spin']    
-        s5 = start_state['hole5_spin']          
+        s5 = start_state['hole5_spin']
+        s6 = start_state['hole6_spin']        
         orb1 = start_state['hole1_orb']
         orb2 = start_state['hole2_orb']
         orb3 = start_state['hole3_orb']
         orb4 = start_state['hole4_orb']   
-        orb5 = start_state['hole5_orb']         
+        orb5 = start_state['hole5_orb']  
+        orb6 = start_state['hole6_orb']          
         x1, y1, z1 = start_state['hole1_coord']
         x2, y2, z2 = start_state['hole2_coord']          
         x3, y3, z3 = start_state['hole3_coord']
         x4, y4, z4 = start_state['hole4_coord']          
         x5, y5, z5 = start_state['hole5_coord']         
-        
+        x6, y6, z6 = start_state['hole6_coord']           
 
         if NiorCu=='Ni':
             d_double = d_Ni_double
@@ -366,7 +413,7 @@ def create_singlet_triplet_basis_change_matrix(VS, double_part, idx, hole345_par
         elif i not in count_list:
             if i in d_double:
                 i2 = d_double.index(i)
-                j, ph = find_singlet_triplet_partner_d_double(VS, double_part[i2], idx[i2], hole345_part[i2])
+                j, ph = find_singlet_triplet_partner_d_double(VS, double_part[i2], idx[i2], hole3456_part[i2])
 
                 
                 s1 = double_part[i2][0]
@@ -421,26 +468,38 @@ def create_singlet_triplet_basis_change_matrix(VS, double_part, idx, hole345_par
                         
                     elif o1==o2=='dxz':  # no need to consider e2='dyz' case
                     # generate paired e2e2 state:
-                        if idx[i2]==345:
-                            slabel = [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole34_part[i2][0:5] + hole34_part[i2][5:15]
-                        elif idx[i2]==245:
-                            slabel = [s1,'dyz']+dpos + hole34_part[i2][0:5] + [s2,'dyz']+dpos + hole34_part[i2][5:15]
-                        elif idx[i2]==145:
-                            slabel = hole34_part[i2][0:5] + [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole34_part[i2][5:15]
-                        elif idx[i2]==135:
-                            slabel = hole34_part[i2][0:5] + [s1,'dyz']+dpos + hole34_part[i2][5:10] +[s2,'dyz']+dpos+ hole34_part[i2][10:15] 
-                        elif idx[i2]==235:
-                            slabel = [s1,'dyz']+dpos + hole34_part[i2][0:5] + hole34_part[i2][5:10] +[s2,'dyz']+dpos+ hole34_part[i2][10:15]
-                        elif idx[i2]==125:
-                            slabel = hole34_part[i2][0:5] + hole34_part[i2][5:10] + [s1,'dyz']+dpos +[s2,'dyz']+dpos+ hole34_part[i2][10:15]
-                        elif idx[i2]==123:
-                            slabel = hole34_part[i2]+ [s1,'dyz']+dpos +[s2,'dyz']+dpos                      
-                        elif idx[i2]==124:
-                            slabel = hole34_part[i2][0:10]+ [s1,'dyz']+dpos + hole34_part[i2][10:15]+[s2,'dyz']+dpos                
-                        elif idx[i2]==134:
-                            slabel = hole34_part[i2][0:5]+ [s1,'dyz']+dpos + hole34_part[i2][5:15]+[s2,'dyz']+dpos             
-                        elif idx[i2]==234:
-                            slabel = [s1,'dyz']+dpos + hole34_part[i2]+[s2,'dyz']+dpos                                   
+                        if idx[i2]==3456:
+                            slabel = [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole3456_part[i2][0:5] + hole3456_part[i2][5:20]
+                        elif idx[i2]==2456:
+                            slabel = [s1,'dyz']+dpos + hole3456_part[i2][0:5] + [s2,'dyz']+dpos + hole3456_part[i2][5:20]
+                        elif idx[i2]==1456:
+                            slabel = hole3456_part[i2][0:5] + [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole3456_part[i2][5:20]
+                        elif idx[i2]==1356:
+                            slabel = hole3456_part[i2][0:5] + [s1,'dyz']+dpos + hole3456_part[i2][5:10] + [s2,'dyz']+dpos + hole3456_part[i2][10:20] 
+                        elif idx[i2]==2356:
+                            slabel = [s1,'dyz']+dpos + hole3456_part[i2][0:5] + hole3456_part[i2][5:10] + [s2,'dyz']+dpos + hole3456_part[i2][10:20] 
+                        elif idx[i2]==1256:
+                            slabel = hole3456_part[i2][0:5] + hole3456_part[i2][5:10] + [s1,'dyz']+dpos + [s2,'dyz']+dpos + hole3456_part[i2][10:20] 
+                        elif idx[i2]==1236:
+                            slabel = hole3456_part[i2][0:15] + [s1,'dyz']+dpos + [s2,'dyz']+dpos +hole3456_part[i2][15:20]     
+                        elif idx[i2]==1246:
+                            slabel = hole3456_part[i2][0:10] + [s1,'dyz']+dpos + hole3456_part[i2][10:15] + [s2,'dyz']+dpos +hole3456_part[i2][15:20] 
+                        elif idx[i2]==1346:
+                            slabel = hole3456_part[i2][0:5] + [s1,'dyz']+dpos + hole3456_part[i2][5:15] + [s2,'dyz']+dpos +hole3456_part[i2][15:20]    
+                        elif idx[i2]==2346:
+                            slabel =[s1,'dyz']+dpos + hole3456_part[i2][0:15] + [s2,'dyz']+dpos+hole3456_part[i2][15:20] 
+                        elif idx[i2]==1234:
+                            slabel = hole3456_part[i2][0:20] + [s1,'dyz']+dpos +  [s2,'dyz']+dpos
+                        elif idx[i2]==1235:
+                            slabel = hole3456_part[i2][0:15] + [s1,'dyz']+dpos +hole3456_part[i2][15:20] +  [s2,'dyz']+dpos 
+                        elif idx[i2]==1245:
+                            slabel = hole3456_part[i2][0:10] +  [s1,'dyz']+dpos +hole3456_part[i2][10:20]  + [s2,'dyz']+dpos
+                        elif idx[i2]==1345:
+                            slabel = hole3456_part[i2][0:5] + [s1,'dyz']+dpos  +hole3456_part[i2][5:20] +  [s2,'dyz']+dpos  
+                        elif idx[i2]==2345:
+                            slabel = [s1,'dyz']+dpos +  hole3456_part[i2][0:20]+  [s2,'dyz']+dpos         
+
+                                 
 
                         tmp_state = vs.create_state(slabel)
                         new_state,_,_ = vs.make_state_canonical(tmp_state)
@@ -489,86 +548,6 @@ def create_singlet_triplet_basis_change_matrix(VS, double_part, idx, hole345_par
 
     return sps.coo_matrix((data,(row,col)),shape=(VS.dim,VS.dim))/np.sqrt(2.0), S_val, Sz_val, AorB_sym
 
-
-
-
-def create_bonding_anti_bonding_basis_change_matrix(VS):
-    
-    dim = VS.dim
-    data = []
-    row = []
-    col = []   
-    start_time = time.time()       
-    bonding_val  = np.zeros(VS.dim, dtype=int)    
-    
-    # store index of partner state to avoid double counting
-    # otherwise, when arriving at i's partner j, its partner would be i
-    count_list = []    
-    
-    for i in range(0,VS.dim):
-        start_state = VS.get_state(VS.lookup_tbl[i])
-        s1 = start_state['hole1_spin']
-        s2 = start_state['hole2_spin']
-        s3 = start_state['hole3_spin']
-        s4 = start_state['hole4_spin']    
-        s5 = start_state['hole5_spin']          
-        orb1 = start_state['hole1_orb']
-        orb2 = start_state['hole2_orb']
-        orb3 = start_state['hole3_orb']
-        orb4 = start_state['hole4_orb']   
-        orb5 = start_state['hole5_orb']         
-        x1, y1, z1 = start_state['hole1_coord']
-        x2, y2, z2 = start_state['hole2_coord']          
-        x3, y3, z3 = start_state['hole3_coord']
-        x4, y4, z4 = start_state['hole4_coord']          
-        x5, y5, z5 = start_state['hole5_coord']         
-        
-        slabel = [s1,orb1,x1,y1,z1,s2,orb2,x2,y2,z2,s3,orb3,x3,y3,z3,s4,orb4,x4,y4,z4,s5,orb5,x5,y5,z5]
-
-        
-        #Two layers of Cu and Ni exchange position and when z=1 in apz orb,it's still itself
-        
-        slabel2 = [s1,orb1,x1,y1,2-z1,s2,orb2,x2,y2,2-z2,s3,orb3,x3,y3,2-z3,s4,orb4,x4,y4,2-z4,s5,orb5,x5,y5,2-z5]
-        tmp_state = vs.create_state(slabel2)
-        partner_state,phase,slabel2 = vs.make_state_canonical(tmp_state)      
-#         print (phase)
-        j = VS.get_index(partner_state)        
-        
-        if j==i:
-            data.append(np.sqrt(2.0)); row.append(i); col.append(i)
-        
-        
-        elif ((slabel[1] == 'd3z2r2' and slabel[4]==2) or (slabel[6] == 'd3z2r2' and slabel[9]==2) or \
-            (slabel[11] == 'd3z2r2' and slabel[14]==2) or (slabel[16] == 'd3z2r2' and slabel[19]==2) or \
-            (slabel[21] == 'd3z2r2' and slabel[24]==2)) and ((slabel[1] == 'd3z2r2' and slabel[4]==0) or \
-            (slabel[6] == 'd3z2r2' and slabel[9]==2) or (slabel[11] == 'd3z2r2' and slabel[14]==2) or \
-            (slabel[16] == 'd3z2r2' and slabel[19]==2) or (slabel[21] == 'd3z2r2' and slabel[24]==2)) and \
-            (slabel[4]==1 or slabel[9]==1 or slabel[14]==1 or slabel[19]==1 or slabel[24]==1):
-            if i not in count_list:
-                # append matrix elements for bonding
-                # convention: original state col i stores bonding and 
-                #             partner state col j stores anti-bonding
-                data.append(1.0);  row.append(i); col.append(i)
-                data.append(phase);  row.append(j); col.append(i)
-                bonding_val[i] = 1          
-
-
-                # append matrix elements for anti-bonding
-                data.append(1.0);  row.append(i); col.append(j)
-                data.append(-phase);   row.append(j); col.append(j)
-                bonding_val[j] = -1
-
-
-                count_list.append(j)
-                
-            
-        else:
-            data.append(np.sqrt(2.0)); row.append(i); col.append(i)            
-                
-    print("basis _bonding_anti_bonding_%s seconds ---" % (time.time() - start_time))
-    return sps.coo_matrix((data,(row,col)),shape=(VS.dim,VS.dim))/np.sqrt(2.0), bonding_val                
-                
-    
 # def print_VS_after_basis_change(VS,S_val,Sz_val):
 #     print ('print_VS_after_basis_change:')
 #     for i in range(0,VS.dim):

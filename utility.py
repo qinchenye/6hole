@@ -94,29 +94,32 @@ def get_NiCu_layer_orbs(state):
     s2 = state['hole2_spin']
     s3 = state['hole3_spin']
     s4 = state['hole4_spin']  
-    s5 = state['hole5_spin']      
+    s5 = state['hole5_spin'] 
+    s6 = state['hole6_spin']     
     o1 = state['hole1_orb']
     o2 = state['hole2_orb']
     o3 = state['hole3_orb']
     o4 = state['hole4_orb']  
-    o5 = state['hole5_orb']      
+    o5 = state['hole5_orb']     
+    o6 = state['hole6_orb']      
     x1, y1, z1 = state['hole1_coord']
     x2, y2, z2 = state['hole2_coord']
     x3, y3, z3 = state['hole3_coord']
     x4, y4, z4 = state['hole4_coord']
-    x5, y5, z5 = state['hole5_coord']    
+    x5, y5, z5 = state['hole5_coord']  
+    x6, y6, z6 = state['hole6_coord']      
 
-    ss = [s1,s2,s3,s4,s5]
-    os = [o1,o2,o3,o4,o5]
-    xs = [x1,x2,x3,x4,x5]
-    ys = [y1,y2,y3,y4,y5]
-    zs = [z1,z2,z3,z4,z5]
+    ss = [s1,s2,s3,s4,s5,s6]
+    os = [o1,o2,o3,o4,o5,o6]
+    xs = [x1,x2,x3,x4,x5,x6]
+    ys = [y1,y2,y3,y4,y5,y6]
+    zs = [z1,z2,z3,z4,z5,z6]
     
     Ni_i = []
 
     
     Ni_layer = []; Cu_layer = [];Cu_i = [];apz_layer = [];apz_i = []
-    for i in range(5):
+    for i in range(6):
         if zs[i]==2:
             Ni_layer.append(ss[i])
             Ni_layer.append(os[i])
@@ -158,24 +161,27 @@ def get_Number_NiCu(state):
     s1 = state['hole1_spin']
     s2 = state['hole2_spin']
     s3 = state['hole3_spin']
-    s4 = state['hole4_spin']    
-    s5 = state['hole5_spin']      
+    s4 = state['hole4_spin']  
+    s5 = state['hole5_spin'] 
+    s6 = state['hole6_spin']     
     o1 = state['hole1_orb']
     o2 = state['hole2_orb']
     o3 = state['hole3_orb']
-    o4 = state['hole4_orb']     
-    o5 = state['hole5_orb']      
+    o4 = state['hole4_orb']  
+    o5 = state['hole5_orb']     
+    o6 = state['hole6_orb']      
     x1, y1, z1 = state['hole1_coord']
     x2, y2, z2 = state['hole2_coord']
     x3, y3, z3 = state['hole3_coord']
     x4, y4, z4 = state['hole4_coord']
-    x5, y5, z5 = state['hole5_coord']    
+    x5, y5, z5 = state['hole5_coord']  
+    x6, y6, z6 = state['hole6_coord']      
 
-    ss = [s1,s2,s3,s4,s5]
-    os = [o1,o2,o3,o4,o5]
-    xs = [x1,x2,x3,x4,x5]
-    ys = [y1,y2,y3,y4,y5]
-    zs = [z1,z2,z3,z4,z5]
+    ss = [s1,s2,s3,s4,s5,s6]
+    os = [o1,o2,o3,o4,o5,o6]
+    xs = [x1,x2,x3,x4,x5,x6]
+    ys = [y1,y2,y3,y4,y5,y6]
+    zs = [z1,z2,z3,z4,z5,z6]
     
     Ni_i = []
 
@@ -183,7 +189,7 @@ def get_Number_NiCu(state):
     Cu_i = []
 
     
-    for i in range(5):
+    for i in range(6):
         if zs[i]==2 and xs[i]==0 and ys[i]==0:
             Ni_i.append(i)
         elif zs[i]==0 and xs[i]==0 and ys[i]==0:
@@ -243,16 +249,16 @@ def get_orb_edep(orb,z,epCu,epNi,epbilayer):
         diag_el = epbilayer        
     return diag_el
 
-def get_double_append(i,n,s1,o1,x1,y1,z1,s2,o2,x2,y2,z2,s3,o3,x3,y3,z3,s4,o4,x4,y4,z4,s5,o5,x5,y5,z5,\
-                      d_list,p_list,idx,hole345_part, double_part): 
+def get_double_append(i,n,s1,o1,x1,y1,z1,s2,o2,x2,y2,z2,s3,o3,x3,y3,z3,s4,o4,x4,y4,z4,s5,o5,x5,y5,z5,s6,o6,x6,y6,z6,\
+                      d_list,p_list,idx,hole3456_part, double_part): 
     if o1 in pam.Ni_Cu_orbs and o2 in pam.Ni_Cu_orbs: #and not (o3 in pam.Ni_Cu_orbs and o4 in pam.Ni_Cu_orbs):
         d_list.append(i)
-        idx.append(n); hole345_part.append([s3, o3, x3, y3, z3,s4, o4, x4, y4, z4,s5, o5, x5, y5, z5])
+        idx.append(n); hole3456_part.append([s3, o3, x3, y3, z3,s4, o4, x4, y4, z4,s5, o5, x5, y5, z5,s6, o6, x6, y6, z6])
         double_part.append([s1,o1,x1,y1,z1,s2,o2,x2,y2,z2])
     elif o1 in pam.O_orbs and o2 in pam.O_orbs:
         p_list.append(i)
 
-def lamlist(l1, l2, l3,l4,l5):
+def lamlist(l1, l2, l3,l4,l5,l6):
     '''
     reduce the 'for' circulation
     '''     
@@ -262,8 +268,9 @@ def lamlist(l1, l2, l3,l4,l5):
             for k in l3:
                 for h in l4:
                     for g in l5: 
-                        x = lambda i=i, j=j, k=k, h=h, g=g: (i,j,k,h,g)
-                        funs.append(x)
+                        for q in l6: 
+                            x = lambda i=i, j=j, k=k, h=h, g=g, q=q: (i,j,k,h,g,q)
+                            funs.append(x)
 
     return funs        
         
