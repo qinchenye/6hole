@@ -175,7 +175,42 @@ def get_ground_state(matrix, VS, S_Ni_val, Sz_Ni_val, S_Cu_val, Sz_Cu_val):
     print (vals)
     print (vals[0])
     
-    if abs(vals[0]-vals[3])<10**(-5):
+    
+    
+    
+    
+    
+    if abs(vals[0]-vals[18])<10**(-5):
+        number = 19
+    elif abs(vals[0]-vals[17])<10**(-5):
+        number = 18       
+    elif abs(vals[0]-vals[16])<10**(-5):
+        number = 17   
+    elif abs(vals[0]-vals[15])<10**(-5):
+        number = 16       
+    elif abs(vals[0]-vals[14])<10**(-5):
+        number = 15           
+    elif abs(vals[0]-vals[13])<10**(-5):
+        number = 14       
+    elif abs(vals[0]-vals[12])<10**(-5):
+        number = 13   
+    elif abs(vals[0]-vals[11])<10**(-5):
+        number = 12       
+    elif abs(vals[0]-vals[10])<10**(-5):
+        number = 11  
+    elif abs(vals[0]-vals[9])<10**(-5):
+        number = 10      
+    elif abs(vals[0]-vals[8])<10**(-5):
+        number = 9  
+    elif abs(vals[0]-vals[7])<10**(-5):
+        number = 8       
+    elif abs(vals[0]-vals[6])<10**(-5):
+        number = 7           
+    elif abs(vals[0]-vals[5])<10**(-5):
+        number = 6       
+    elif abs(vals[0]-vals[4])<10**(-5):
+        number = 5      
+    elif abs(vals[0]-vals[3])<10**(-5):
         number = 4
     elif abs(vals[0]-vals[2])<10**(-5):
         number = 3        

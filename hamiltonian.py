@@ -1692,7 +1692,7 @@ def get_double_occu_list(VS):
             elif z2==0:            
                 util.get_double_append(i,1456,s2,o2,x2,y2,z2,s3,o3,x3,y3,z3,s1,o1,x1,y1,z1,s4,o4,x4,y4,z4,s5,o5,x5,y5,z5,s6,o6,x6,y6,z6,\
                                    d_Cu_list,p_list,idx_Cu,hole3456_Cu_part, double_Cu_part)
-            elif z1==2:
+            elif z2==1:
                 apz_list.append(i)                  
                 
         if (x2, y2, z2)==(x4, y4, z4):
@@ -1702,7 +1702,7 @@ def get_double_occu_list(VS):
             elif z2==0:
                 util.get_double_append(i,1356,s2,o2,x2,y2,z2,s4,o4,x4,y4,z4,s1,o1,x1,y1,z1,s3,o3,x3,y3,z3,s5,o5,x5,y5,z5,s6,o6,x6,y6,z6,\
                                    d_Cu_list,p_list,idx_Cu,hole3456_Cu_part, double_Cu_part) 
-            elif z1==2:
+            elif z2==1:
                 apz_list.append(i)                
                 
         if (x3, y3, z3)==(x4, y4, z4):
@@ -1766,43 +1766,43 @@ def get_double_occu_list(VS):
                 apz_list.append(i)   
                 
         if (x2, y2, z2)==(x6, y6, z6):
-            if z1==2:
+            if z2==2:
                 util.get_double_append(i,1345,s2,o2,x2,y2,z2,s6,o6,x6,y6,z6,s1,o1,x1,y1,z1,s3,o3,x3,y3,z3,s4,o4,x4,y4,z4,s5,o5,x5,y5,z5,\
                                    d_Ni_list,p_list,idx_Ni,hole3456_Ni_part, double_Ni_part)
-            elif z1==0:
+            elif z2==0:
                 util.get_double_append(i,1345,s2,o2,x2,y2,z2,s6,o6,x6,y6,z6,s1,o1,x1,y1,z1,s3,o3,x3,y3,z3,s4,o4,x4,y4,z4,s5,o5,x5,y5,z5,\
                                    d_Cu_list,p_list,idx_Cu,hole3456_Cu_part, double_Cu_part)     
-            elif z1==1:
+            elif z2==1:
                 apz_list.append(i)                  
                 
         if (x3, y3, z3)==(x6, y6, z6):
-            if z1==2:
+            if z3==2:
                 util.get_double_append(i,1245,s3,o3,x3,y3,z3,s6,o6,x6,y6,z6,s1,o1,x1,y1,z1,s2,o2,x2,y2,z2,s4,o4,x4,y4,z4,s5,o5,x5,y5,z5,\
                                    d_Ni_list,p_list,idx_Ni,hole3456_Ni_part, double_Ni_part)
-            elif z1==0:
+            elif z3==0:
                 util.get_double_append(i,1245,s3,o3,x3,y3,z3,s6,o6,x6,y6,z6,s1,o1,x1,y1,z1,s2,o2,x2,y2,z2,s4,o4,x4,y4,z4,s5,o5,x5,y5,z5,\
                                    d_Cu_list,p_list,idx_Cu,hole3456_Cu_part, double_Cu_part)     
-            elif z1==1:
+            elif z3==1:
                 apz_list.append(i)                    
                 
         if (x4, y4, z4)==(x6, y6, z6):
-            if z1==2:
+            if z4==2:
                 util.get_double_append(i,1235,s4,o4,x4,y4,z4,s6,o6,x6,y6,z6,s1,o1,x1,y1,z1,s2,o2,x2,y2,z2,s3,o3,x3,y3,z3,s5,o5,x5,y5,z5,\
                                    d_Ni_list,p_list,idx_Ni,hole3456_Ni_part, double_Ni_part)
-            elif z1==0:
+            elif z4==0:
                 util.get_double_append(i,1235,s4,o4,x4,y4,z4,s6,o6,x6,y6,z6,s1,o1,x1,y1,z1,s2,o2,x2,y2,z2,s3,o3,x3,y3,z3,s5,o5,x5,y5,z5,\
                                    d_Cu_list,p_list,idx_Cu,hole3456_Cu_part, double_Cu_part)     
-            elif z1==1:
+            elif z4==1:
                 apz_list.append(i)                    
                 
         if (x5, y5, z5)==(x6, y6, z6):
-            if z1==2:
+            if z5==2:
                 util.get_double_append(i,1234,s5,o5,x5,y5,z5,s6,o6,x6,y6,z6,s1,o1,x1,y1,z1,s2,o2,x2,y2,z2,s3,o3,x3,y3,z3,s4,o4,x4,y4,z4,\
                                    d_Ni_list,p_list,idx_Ni,hole3456_Ni_part, double_Ni_part)
-            elif z1==0:
+            elif z5==0:
                 util.get_double_append(i,1234,s5,o5,x5,y5,z5,s6,o6,x6,y6,z6,s1,o1,x1,y1,z1,s2,o2,x2,y2,z2,s3,o3,x3,y3,z3,s4,o4,x4,y4,z4,\
                                    d_Cu_list,p_list,idx_Cu,hole3456_Cu_part, double_Cu_part)     
-            elif z1==1:
+            elif z5==1:
                 apz_list.append(i)                  
                 
     print ("len(d_Ni_list)", len(d_Ni_list))
