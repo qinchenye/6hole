@@ -1595,10 +1595,14 @@ def create_edep_diag_matrix(VS,ANi,ACu,epNi,epCu,epbilayer):
         diag_el += util.get_orb_edep(orb5,z5,epCu,epNi,epbilayer)   
         diag_el += util.get_orb_edep(orb6,z6,epCu,epNi,epbilayer)          
         Ni_i,Cu_i = util.get_Number_NiCu(state)
+        if Ni_i == 1:
+            diag_el +=3*ANi/2 
+        if Cu_i == 1:
+            diag_el +=3*ACu/2   
         if Ni_i == 0:
-            diag_el +=ANi/2
+            diag_el +=2*ANi
         if Cu_i == 0:
-            diag_el +=ACu/2        
+            diag_el +=2*ACu           
 
         data.append(diag_el); row.append(i); col.append(i)
 #         print (i, diag_el)
@@ -1817,8 +1821,8 @@ def get_double_occu_list(VS):
            d_Cu_list, idx_Cu, hole3456_Cu_part, double_Cu_part, \
            p_list,apz_list
 
-def create_interaction_matrix_ALL_syms(VS,d_double,p_double,double_part,idx,hole3456_part , \
-                                       S_val, Sz_val, AorB_sym,ACu, ANi, Upp):
+def create_interaction_matrix_ALL_syms(VS,d_double,p_double,apz_double,double_part,idx,hole3456_part , \
+                                       S_val, Sz_val, AorB_sym,ACu, ANi, Upp, Uoo):
     '''
     Create Coulomb-exchange interaction matrix of d-multiplets including all symmetries
     
@@ -1884,9 +1888,9 @@ def create_interaction_matrix_ALL_syms(VS,d_double,p_double,double_part,idx,hole
             o12 = tuple(o12)
                 
             if z1==2:
-                state_order, interaction_mat, Stot, Sz_set, AorB = get_interaction_mat(ANi/2, sym)
+                state_order, interaction_mat, Stot, Sz_set, AorB = get_interaction_mat(ANi, sym)
             elif z1==0:
-                state_order, interaction_mat, Stot, Sz_set, AorB = get_interaction_mat(ACu/2, sym)
+                state_order, interaction_mat, Stot, Sz_set, AorB = get_interaction_mat(ACu, sym)
                 
             sym_orbs = state_order.keys()
             
@@ -1994,6 +1998,10 @@ def create_interaction_matrix_ALL_syms(VS,d_double,p_double,double_part,idx,hole
     if Upp!=0:
         for i in p_double:
             data.append(Upp); row.append(i); col.append(i)
+            
+    if Uoo!=0:
+        for i in apz_double:
+            data.append(Uoo); row.append(i); col.append(i)            
 
     row = np.array(row)
     col = np.array(col)

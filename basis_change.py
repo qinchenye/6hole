@@ -548,6 +548,86 @@ def create_singlet_triplet_basis_change_matrix(VS, double_part, idx, hole3456_pa
 
     return sps.coo_matrix((data,(row,col)),shape=(VS.dim,VS.dim))/np.sqrt(2.0), S_val, Sz_val, AorB_sym
 
+
+def create_bonding_anti_bonding_basis_change_matrix(VS):
+    
+    dim = VS.dim
+    data = []
+    row = []
+    col = []   
+    start_time = time.time()       
+    bonding_val  = np.zeros(VS.dim, dtype=int)    
+    
+    # store index of partner state to avoid double counting
+    # otherwise, when arriving at i's partner j, its partner would be i
+    count_list = []    
+    
+    for i in range(0,VS.dim):
+        start_state = VS.get_state(VS.lookup_tbl[i])
+        s1 = start_state['hole1_spin']
+        s2 = start_state['hole2_spin']
+        s3 = start_state['hole3_spin']
+        s4 = start_state['hole4_spin']    
+        s5 = start_state['hole5_spin']    
+        s6 = start_state['hole6_spin']          
+        orb1 = start_state['hole1_orb']
+        orb2 = start_state['hole2_orb']
+        orb3 = start_state['hole3_orb']
+        orb4 = start_state['hole4_orb']   
+        orb5 = start_state['hole5_orb']  
+        orb6 = start_state['hole6_orb']          
+        x1, y1, z1 = start_state['hole1_coord']
+        x2, y2, z2 = start_state['hole2_coord']          
+        x3, y3, z3 = start_state['hole3_coord']
+        x4, y4, z4 = start_state['hole4_coord']          
+        x5, y5, z5 = start_state['hole5_coord']      
+        x6, y6, z6 = start_state['hole6_coord']         
+        
+        slabel = [s1,orb1,x1,y1,z1,s2,orb2,x2,y2,z2,s3,orb3,x3,y3,z3,s4,orb4,x4,y4,z4,s5,orb5,x5,y5,z5,s6,orb6,x6,y6,z6]
+
+        
+        #Two layers of Cu and Ni exchange position and when z=1 in apz orb,it's still itself
+        
+        slabel2 = [s1,orb1,x1,y1,2-z1,s2,orb2,x2,y2,2-z2,s3,orb3,x3,y3,2-z3,s4,orb4,x4,y4,2-z4,s5,orb5,x5,y5,2-z5,s6,orb6,x6,y6,2-z6]
+        tmp_state = vs.create_state(slabel2)
+        partner_state,phase,slabel2 = vs.make_state_canonical(tmp_state)      
+#         print (phase)
+        j = VS.get_index(partner_state)        
+        
+        if j==i:
+            data.append(np.sqrt(2.0)); row.append(i); col.append(i)
+        
+        
+        elif ((slabel[1] == 'd3z2r2' and slabel[4]==2) or (slabel[6] == 'd3z2r2' and slabel[9]==2) or \
+            (slabel[11] == 'd3z2r2' and slabel[14]==2) or (slabel[16] == 'd3z2r2' and slabel[19]==2) or \
+            (slabel[21] == 'd3z2r2' and slabel[24]==2) or (slabel[26] == 'd3z2r2' and slabel[29]==2)) and \
+            ((slabel[1] == 'd3z2r2' and slabel[4]==0) or  (slabel[6] == 'd3z2r2' and slabel[9]==0) or \
+            (slabel[11] == 'd3z2r2' and slabel[14]==0) or (slabel[16] == 'd3z2r2' and slabel[19]==0) or \
+            (slabel[21] == 'd3z2r2' and slabel[24]==0) or (slabel[26] == 'd3z2r2' and slabel[29]==0)):
+            if i not in count_list:
+                # append matrix elements for bonding
+                # convention: original state col i stores bonding and 
+                #             partner state col j stores anti-bonding
+                data.append(1.0);  row.append(i); col.append(i)
+                data.append(phase);  row.append(j); col.append(i)
+                bonding_val[i] = 1          
+
+
+                # append matrix elements for anti-bonding
+                data.append(1.0);  row.append(i); col.append(j)
+                data.append(-phase);   row.append(j); col.append(j)
+                bonding_val[j] = -1
+
+
+                count_list.append(j)
+                
+            
+        else:
+            data.append(np.sqrt(2.0)); row.append(i); col.append(i)            
+                
+    print("basis _bonding_anti_bonding_%s seconds ---" % (time.time() - start_time))
+    return sps.coo_matrix((data,(row,col)),shape=(VS.dim,VS.dim))/np.sqrt(2.0), bonding_val    
+
 # def print_VS_after_basis_change(VS,S_val,Sz_val):
 #     print ('print_VS_after_basis_change:')
 #     for i in range(0,VS.dim):
